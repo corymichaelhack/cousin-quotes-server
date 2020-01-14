@@ -9,14 +9,20 @@ res.send("this is the quote get route");
 });
 
 router.post('/addquote', (req, res)=>{
-    let addedQuote = "New quote added";
+    let quote = req.body.addedQuote.quote
 
     QuoteModel.create({
-        quote: addedQuote
-    }).then( reposnse => {
-        res.send("Sent through")
-    })
-    
+        quote: quote
+    }).then(
+        response => {
+            res.json({
+                quote: quote
+            })
+        },
+        error => {
+            res.send("Something sent")
+        }
+        );
 });
 
 
